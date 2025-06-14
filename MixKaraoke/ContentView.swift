@@ -10,24 +10,15 @@ struct ContentView: View {
     @State private var isPlaying = false
     
     private let lyric = [
-        "人造ファイヤ",
-        "ファイボワイパー",
-        "タイガー",
-        "タイガー",
-        "タタタタタイガー",
-        "チャペアぺカラキナ",
-        "チャペアぺカラキナ",
-        "ミョーホントスケ",
-        "ワイパー",
-        "ファイヤー",
-        "ファイヤー",
-        "虎虎カラキナ",
-        "チャペアぺファーマー",
-        "海人海人ジャスパー",
-        "虎タイガー",
-        "虎タイガー",
-        "人造繊維",
-        "イエッタイガー",
+        Word(text: "人造ファイヤ", startTime: 0.0, endTime: 1.2),
+        Word(text: "ファイボワイパー", startTime: 1.2, endTime: 2.8),
+        Word(text: "タイガー", startTime: 2.8, endTime: 3.6),
+        Word(text: "タイガー", startTime: 3.6, endTime: 4.6),
+        Word(text: "タタタタタイガー", startTime: 4.6, endTime: 6.8),
+        Word(text: "チャペアぺカラキナ", startTime: 6.8, endTime: 8.8),
+        Word(text: "チャペアぺカラキナ", startTime: 8.8, endTime: 10.8),
+        Word(text: "ミョーホントスケ", startTime: 10.8, endTime: 12.2),
+        Word(text: "ワイパー", startTime: 12.5, endTime: 13.7)
         
     ]
     
@@ -35,14 +26,11 @@ struct ContentView: View {
         VStack {
             ScrollView {
                 FlowLayout {
-                    ForEach(lyric, id: \.self) { lyricWord in
-                        
-                        let progress = currentTime / 3.0
-                        
-                        Text(lyricWord)
+                    ForEach(lyric, id: \.id) { w in
+                        Text(w.text)
                             .font(.system(size: 80, weight: .bold))
                             .foregroundStyle(
-                                ProgressGradient.create(progress: progress, opacity: 0.3)
+                                ProgressGradient.create(progress: w.calcProgress(currentTime), opacity: 0.3)
                             )
                     }
                 }.padding(.horizontal, 20)
