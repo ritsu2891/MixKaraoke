@@ -34,9 +34,11 @@ struct ProgressGradient {
         } else {
             // For intermediate progress values, create a gradient with a transition at the progress point
             colors = [textColor, textColor, textColor.opacity(clampedOpacity), textColor.opacity(clampedOpacity)]
+            let lower = max(0.0, clampedProgress - switchWidth)
+            let upper = min(1.0, clampedProgress + switchWidth)
             stops = [Gradient.Stop(color: colors[0], location: 0.0),
-                     Gradient.Stop(color: colors[1], location: clampedProgress - switchWidth),
-                     Gradient.Stop(color: colors[2], location: clampedProgress + switchWidth),
+                     Gradient.Stop(color: colors[1], location: lower),
+                     Gradient.Stop(color: colors[2], location: upper),
                      Gradient.Stop(color: colors[3], location: 1.0)]
         }
         
